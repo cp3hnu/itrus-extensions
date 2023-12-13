@@ -1,4 +1,8 @@
 (function() {
+  function openTargetUrl() {
+    window.open("http://192.168.100.230:1889/#/system/systemList", "_blank");
+  }
+
   function fallbackCopyTextToClipboard(text) {
     const input = document.createElement("input");
     input.value = text;
@@ -7,12 +11,12 @@
     try {
       const successful = document.execCommand("copy");
       if (successful) {
-        window.open("http://192.168.100.230:1889/#/system/systemList", "_blank");
+        openTargetUrl();
       } else {
-        console.log("execCommand call failed");
+        console.log("error: execCommand call failed");
       }
     } catch (err) {
-      console.error("execCommand failed", err);
+      console.log("error: execCommand failed:", err);
     }
     document.body.removeChild(input);
   }
@@ -25,10 +29,10 @@
     navigator.clipboard
       .writeText(text)
       .then(() => {
-        window.open("http://192.168.100.230:1889/#/system/systemList", "_blank");
+        openTargetUrl();
       })
       .catch(err => {
-        console.log("navigator.clipboard failed", err);
+        console.log("error: navigator.clipboard failed:", err);
         fallbackCopyTextToClipboard(text);
       });
   }

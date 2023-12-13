@@ -6,19 +6,22 @@
   "background": {
     "service_worker": "background.js"
   },
-  "permissions": ["contextMenus", "scripting"],
+  "permissions": ["contextMenus", "scripting", "activeTab"],
   "host_permissions": ["<all_urls>"],
   "content_scripts": [
     {
       "matches": ["http://*/*", "https://*/*"],
-      "js": ["inject.js"],
+      "js": ["content-script.js"],
       "all_frames": true
     }
   ],
   "web_accessible_resources": [{ 
-    "resources": ["content.js"],
+    "resources": ["injected.js"],
     "matches": ["<all_urls>"]
   }],
+  "action": {
+    "default_title": "天威诚信前端开发浏览器插件" 
+  },
   "icons": {
     "16": "images/icon16.png",
     "32": "images/icon32.png",
